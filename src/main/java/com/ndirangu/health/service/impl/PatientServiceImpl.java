@@ -5,10 +5,11 @@ import com.ndirangu.health.repository.PatientRepository;
 import com.ndirangu.health.service.PatientService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
-
+@Service
 public class PatientServiceImpl implements PatientService {
     private PatientRepository patientRepository;
 
