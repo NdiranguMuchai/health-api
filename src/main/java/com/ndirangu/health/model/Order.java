@@ -1,5 +1,6 @@
 package com.ndirangu.health.model;
 
+import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "order")
+@ApiModel(description = "All details about an order. ")
 public class Order {
   @Id
   @GenericGenerator(name = "uuid", strategy = "uuid2")

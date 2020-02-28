@@ -1,5 +1,7 @@
 package com.ndirangu.health.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
@@ -10,18 +12,28 @@ import java.util.Date;
 import java.util.UUID;
 @Entity
 @Table(name = "patient")
+@ApiModel(description = "All details about the Patient. ")
 public class Patient {
     @Id
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @GeneratedValue(generator = "uuid")
+    @ApiModelProperty(notes = "The database generated patient ID")
     private UUID id;
+
+    @ApiModelProperty(notes = "The patient's first name")
     private String firstName;
+
+    @ApiModelProperty(notes = "The patient's last name")
     private String lastName;
+
+    @ApiModelProperty(notes = "The patient's national ID number")
     private Long idNumber;
     private String town;
     private String street;
     private String county;
     private String district;
+
+    @ApiModelProperty(notes = "The patient's date of birth")
     private Date dateOfBirth;
 
 
