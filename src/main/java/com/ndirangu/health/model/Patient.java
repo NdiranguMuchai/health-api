@@ -5,18 +5,19 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import java.util.Set;
 import java.util.UUID;
 @Entity
+@Table(name = "patient")
 public class Patient {
     @Id
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(generator = "uuid")
     private UUID id;
     private String firstName;
     private String lastName;
-    private int idNumber;
+    private Long idNumber;
     private String town;
     private String street;
     private String county;
@@ -51,11 +52,11 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public int getIdNumber() {
+    public Long getIdNumber() {
         return idNumber;
     }
 
-    public void setIdNumber(int idNumber) {
+    public void setIdNumber(Long idNumber) {
         this.idNumber = idNumber;
     }
 

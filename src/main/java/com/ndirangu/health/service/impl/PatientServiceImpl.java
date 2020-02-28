@@ -36,6 +36,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public UUID update(Patient patient) throws Exception{
         patientRepository.findById(patient.getId()).orElseThrow(()-> new Exception("Patient with id "+patient.getId()+" not found"));
-        return null;
+        patient.setId(patient.getId());
+        return patientRepository.save(patient).getId();
     }
 }
