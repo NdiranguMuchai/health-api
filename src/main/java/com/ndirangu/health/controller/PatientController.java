@@ -32,7 +32,7 @@ public class PatientController {
         return patientService.list(pageable);
     }
 
-    @ApiOperation(value = "Returns a a single patient by id")
+    @ApiOperation(value = "Returns  a single patient by id")
     @GetMapping("/{id}")
     public @ResponseBody Optional<Patient>findOne(@PathVariable UUID id) throws Exception{
         patientService.findOne(id).orElseThrow(()-> new Exception("patient with id "+id+" not found"));

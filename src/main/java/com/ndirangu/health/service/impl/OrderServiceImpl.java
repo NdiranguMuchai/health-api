@@ -5,10 +5,11 @@ import com.ndirangu.health.repository.OrderRepository;
 import com.ndirangu.health.service.OrderService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
-
+@Service
 public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
