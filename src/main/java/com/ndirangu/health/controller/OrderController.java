@@ -1,5 +1,6 @@
 package com.ndirangu.health.controller;
 import com.ndirangu.health.model.Order;
+import com.ndirangu.health.model.Patient;
 import com.ndirangu.health.service.OrderService;
 import com.ndirangu.health.service.PatientService;
 import io.swagger.annotations.Api;
@@ -23,40 +24,51 @@ public class OrderController {
         this.orderService = orderService;
         this.patientService = patientService;
     }
+
     @GetMapping({"", "/", "/list"})
     @ApiOperation(value = "Returns a list of all orders available")
-    public @ResponseBody  Page<Order> list(Pageable pageable){
+    public @ResponseBody
+    Page<Order> list(Pageable pageable) {
         return orderService.list(pageable);
     }
+
     @GetMapping("/{orderId}")
     @ApiOperation(value = "Finds an order based on its id")
-    public @ResponseBody Optional<Order> findOne(@PathVariable UUID orderId) throws Exception{
-        orderService.findOne(orderId).orElseThrow(()-> new Exception("Order with id "+orderId+" not found"));
+    public @ResponseBody
+    Optional<Order> findOne(@PathVariable UUID orderId) throws Exception {
+        orderService.findOne(orderId).orElseThrow(() -> new Exception("Order with id " + orderId + " not found"));
         return orderService.findOne(orderId);
     }
+
     @GetMapping("/{patientId}/list")
     @ApiOperation(value = "Finds all orders for a patient")
-    public @ResponseBody Page<Order> findOrdersByPatientId(@PathVariable UUID patientId, Pageable pageable){
-        return orderService.getByPatientId(patientId,pageable);
+    public @ResponseBody
+    Page<Order> findOrdersByPatientId(@PathVariable UUID patientId, Pageable pageable) {
+        return orderService.getByPatientId(patientId, pageable);
     }
+
     @PostMapping("/{patientId}/create")
     @ApiOperation(value = "creates an order")
-    public @ResponseBody UUID create(
+    public @ResponseBody
+    UUID create(
             @ApiParam(value = "Order object store in database table", required = true)
             @RequestBody Order order,
-            @PathVariable UUID patientId) throws Exception{
+            @PathVariable UUID patientId) throws Exception {
         return patientService.findOne(patientId).map(patient -> {
             order.setPatient(patient);
             return orderService.create(order);
-        }).orElseThrow(() -> new Exception("patient with id"+patientId+"not found"));
+        }).orElseThrow(() -> new Exception("patient with id" + patientId + "not found"));
     }
 
     @ApiOperation(value = "updates an order given their id")
-    @PutMapping("/{orderId}")
-    public @ResponseBody UUID update(@RequestBody Order order, @PathVariable UUID orderId) throws Exception{
-        orderService.findOne(orderId).orElseThrow(()-> new Exception("patient with id "+orderId+" not found"));
-        order.setId(orderId);
-        return orderService.update(order);
-
+    @PutMapping("/{patientId}/update/{orderId}")
+    public @ResponseBody
+    UUID update(@RequestBody Order order, @PathVariable UUID orderId, @PathVariable UUID patientId) throws Exception {
+        orderService.findOne(orderId).orElseThrow(() -> new Exception("patient with id " + orderId + " not found"));
+        return patientService.findOne(patientId).map(patient -> {
+            order.setPatient(patient);
+            order.setId(orderId);
+            return orderService.create(order);
+        }).orElseThrow(() -> new Exception("patient with id" + patientId + "not found"));
     }
 }
