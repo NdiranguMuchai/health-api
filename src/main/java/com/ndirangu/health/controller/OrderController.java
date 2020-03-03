@@ -34,6 +34,11 @@ public class OrderController {
         orderService.findOne(orderId).orElseThrow(()-> new Exception("Order with id "+orderId+" not found"));
         return orderService.findOne(orderId);
     }
+    @GetMapping("/{patientId}/list")
+    @ApiOperation(value = "Finds all orders for a patient")
+    public @ResponseBody Page<Order> findOrdersByPatientId(@PathVariable UUID patientId, Pageable pageable){
+        return orderService.getByPatientId(patientId,pageable);
+    }
     @PostMapping("/{patientId}/create")
     @ApiOperation(value = "creates an order")
     public @ResponseBody UUID create(

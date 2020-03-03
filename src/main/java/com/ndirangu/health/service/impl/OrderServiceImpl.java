@@ -44,4 +44,9 @@ public class OrderServiceImpl implements OrderService {
         order.setId(order.getId());
         return orderRepository.save(order).getId();
     }
+
+    @Override
+    public Page<Order> getByPatientId(UUID patientId, Pageable pageable) {
+        return orderRepository.findByPatientId(patientId,pageable);
+    }
 }

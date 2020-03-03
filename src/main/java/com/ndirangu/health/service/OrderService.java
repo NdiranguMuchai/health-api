@@ -13,4 +13,5 @@ public interface OrderService {
     Page<Order> list(Pageable pageable);
     Optional<Order> findOne(UUID id) throws Exception;
     UUID update(Order order) throws Exception;
+    Page<Order> getByPatientId(UUID patientId, Pageable pageable);
 }
