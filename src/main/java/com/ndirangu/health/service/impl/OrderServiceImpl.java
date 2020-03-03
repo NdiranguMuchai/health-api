@@ -1,7 +1,9 @@
 package com.ndirangu.health.service.impl;
 
 import com.ndirangu.health.model.Order;
+import com.ndirangu.health.model.Patient;
 import com.ndirangu.health.repository.OrderRepository;
+import com.ndirangu.health.repository.PatientRepository;
 import com.ndirangu.health.service.OrderService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,14 +14,17 @@ import java.util.UUID;
 @Service
 public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
+    private PatientRepository patientRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, PatientRepository patientRepository) {
         this.orderRepository = orderRepository;
+        this.patientRepository = patientRepository;
     }
 
     @Override
     public UUID create(Order order) {
-        return orderRepository.save(order).getId();
+
+            return orderRepository.save(order).getId();
     }
 
     @Override

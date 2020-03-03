@@ -1,12 +1,10 @@
 package com.ndirangu.health.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +16,10 @@ public class Order {
   @GeneratedValue(generator = "uuid")
   private UUID id;
   private String name;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "patient_id",nullable = false)
+  @JsonIgnore
+  private Patient patient;
 
   public Order(){}
 
@@ -35,5 +37,13 @@ public class Order {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public Patient getPatient() {
+    return patient;
+  }
+
+  public void setPatient(Patient patient) {
+    this.patient = patient;
   }
 }
