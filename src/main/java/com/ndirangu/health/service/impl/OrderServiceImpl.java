@@ -24,7 +24,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public UUID create(Order order) {
 
-            return orderRepository.save(order).getId();
+        return orderRepository.save(order).getId();
     }
 
     @Override

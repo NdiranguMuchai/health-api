@@ -1,6 +1,5 @@
 package com.ndirangu.health.controller;
 import com.ndirangu.health.model.Order;
-import com.ndirangu.health.model.Patient;
 import com.ndirangu.health.service.OrderService;
 import com.ndirangu.health.service.PatientService;
 import io.swagger.annotations.Api;
