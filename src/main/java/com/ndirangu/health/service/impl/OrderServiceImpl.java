@@ -1,7 +1,6 @@
 package com.ndirangu.health.service.impl;
 
 import com.ndirangu.health.model.Order;
-import com.ndirangu.health.model.Patient;
 import com.ndirangu.health.repository.OrderRepository;
 import com.ndirangu.health.repository.PatientRepository;
 import com.ndirangu.health.service.OrderService;

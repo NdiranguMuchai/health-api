@@ -1,7 +1,6 @@
 package com.ndirangu.health.service;
 
 import com.ndirangu.health.model.Order;
-import com.ndirangu.health.model.Patient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
